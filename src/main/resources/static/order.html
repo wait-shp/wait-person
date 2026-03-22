@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>简单下单页</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 40px;
+    }
+    .container {
+      max-width: 400px;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+    }
+    input {
+      width: 100%;
+      padding: 6px 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 16px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 10px;
+      margin-top: 16px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>简单下单</h2>
+    <label>
+      商品ID
+      <input id="productId" value="P1001" />
+    </label>
+    <label>
+      数量
+      <input id="quantity" type="number" value="1" />
+    </label>
+    <label>
+      金额
+      <input id="amount" type="number" step="0.01" value="99.00" />
+    </label>
+    <button onclick="placeOrder()">提交订单</button>
+
+    <pre id="result"></pre>
+  </div>
+
+  <script>
+    async function placeOrder() {
+      const productId = document.getElementById("productId").value;
+      const quantity = Number(document.getElementById("quantity").value);
+      const amount = Number(document.getElementById("amount").value);
+
+      const resultEl = document.getElementById("result");
+      resultEl.textContent = "下单中...";
+
+      try {
+        const res = await fetch("/api/orders", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ productId, quantity, amount }),
+        });
+        const data = await res.json();
+        resultEl.textContent = JSON.stringify(data, null, 2);
+      } catch (e) {
+        resultEl.textContent = "请求失败: " + e;
+      }
+    }
+  </script>
+</body>
+</html>
+
