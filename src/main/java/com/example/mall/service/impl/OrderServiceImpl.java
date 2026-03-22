@@ -26,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
         "Creating order (in-memory). productId={}, quantity={}, amount={}",
         request.getProductId(),
         request.getQuantity(),
-        request.getAmount());
+        request.getAmount()+"结束");
 
     Order order = new Order();
     order.setId(idGenerator.getAndIncrement());
