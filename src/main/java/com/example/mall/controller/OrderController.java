@@ -35,7 +35,7 @@ public class OrderController {
         "Create order finished. orderId={}, paymentStatus={}, status={}",
         order.getId(),
         order.getPaymentStatus(),
-        order.getStatus());
+        order.getStatus()+"结束");
     return ResponseEntity.ok(order);
   }
 
