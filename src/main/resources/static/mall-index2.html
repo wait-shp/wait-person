@@ -69,24 +69,46 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="card">
+    <div class="card" id="homeCard">
       <h1>欢迎光临</h1>
-      <p>点击下方按钮进入下单页面（地址栏不会跳走）</p>
-      <button class="btn" type="button" onclick="openOrder()">下单</button>
+      <p>点击下方按钮进入下单页面</p>
+      <button class="btn" type="button" onclick="goToOrder()">下单</button>
     </div>
 
-    <div id="orderBox">
+    <div class="card" id="orderCard" style="display: none;">
+      <button class="btn" type="button" onclick="goHome()" style="margin-bottom: 15px;">返回首页</button>
       <iframe id="orderFrame" src=""></iframe>
     </div>
   </div>
 
   <script>
-    function openOrder() {
-      const box = document.getElementById("orderBox");
-      const frame = document.getElementById("orderFrame");
-      box.style.display = "block";
-      frame.src = "/mall/order";
+    function goToOrder() {
+      // 使用 history.pushState 添加历史记录，同时显示订单卡片
+      history.pushState({ page: 'order' }, '', '/mall/order');
+      document.getElementById('homeCard').style.display = 'none';
+      document.getElementById('orderCard').style.display = 'block';
+      document.getElementById('orderFrame').src = '/order.html';
     }
+
+    function goHome() {
+      // 使用 history.pushState 添加历史记录，同时显示首页卡片
+      history.pushState({ page: 'home' }, '', '/mall');
+      document.getElementById('orderCard').style.display = 'none';
+      document.getElementById('homeCard').style.display = 'block';
+      document.getElementById('orderFrame').src = '';
+    }
+
+    // 监听浏览器返回按钮
+    window.onpopstate = function(event) {
+      if (event.state && event.state.page === 'home') {
+        document.getElementById('orderCard').style.display = 'none';
+        document.getElementById('homeCard').style.display = 'block';
+        document.getElementById('orderFrame').src = '';
+      } else if (event.state && event.state.page === 'order') {
+        document.getElementById('homeCard').style.display = 'none';
+        document.getElementById('orderCard').style.display = 'block';
+      }
+    };
   </script>
 </body>
 </html>
