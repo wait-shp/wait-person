@@ -9,7 +9,7 @@ public class PageController {
   @GetMapping({"/mall", "/mall/"})
   public String mallIndexPage() {
     // 服务端转发到 static 里的首页（使用干净版，避免旧文件内容重复）
-    return "forward:/mall-index2.html";
+    return "forward:/mall-index.html";
   }
 
   @GetMapping("/mall/order")
