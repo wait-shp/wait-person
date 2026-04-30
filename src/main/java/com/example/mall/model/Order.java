@@ -1,5 +1,6 @@
 package com.example.mall.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Order {
@@ -14,7 +15,7 @@ public class Order {
   private Integer quantity;
 
   /** 订单金额（示例：单位元） */
-  private Double amount;
+  private BigDecimal amount;
 
   /** 订单状态（示例：CREATED） */
   private String status;
@@ -49,11 +50,11 @@ public class Order {
     this.quantity = quantity;
   }
 
-  public Double getAmount() {
+  public BigDecimal getAmount() {
     return amount;
   }
 
-  public void setAmount(Double amount) {
+  public void setAmount(BigDecimal amount) {
     this.amount = amount;
   }
 

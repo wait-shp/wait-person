@@ -1,5 +1,7 @@
 package com.example.mall.dto;
 
+import java.math.BigDecimal;
+
 public class OrderRequest {
 
     /**
@@ -15,7 +17,7 @@ public class OrderRequest {
     /**
      * 订单金额
      */
-    private Double amount;
+    private BigDecimal amount;
 
   public String getProductId() {
     return productId;
@@ -33,11 +35,11 @@ public class OrderRequest {
     this.quantity = quantity;
   }
 
-  public Double getAmount() {
+  public BigDecimal getAmount() {
     return amount;
   }
 
-  public void setAmount(Double amount) {
+  public void setAmount(BigDecimal amount) {
     this.amount = amount;
   }
 }
